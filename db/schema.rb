@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_24_042655) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_24_123030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clock_ins", force: :cascade do |t|
+    t.datetime "wake_time", precision: nil
+    t.datetime "sleep_time", precision: nil
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_clock_ins_on_user_id"
+  end
 
   create_table "follows", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -28,5 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_24_042655) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "clock_ins", "users"
   add_foreign_key "follows", "users"
 end
