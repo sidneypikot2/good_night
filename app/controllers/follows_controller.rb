@@ -23,6 +23,7 @@ class FollowsController < ApplicationController
 
   # GET /user/1/follows or /user/1/follows.json
   def follows
+    @follows = @user.following.page(current_page)
   end
 
   private

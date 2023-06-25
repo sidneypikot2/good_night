@@ -4,7 +4,7 @@ class ClockInsController < ApplicationController
 
   # GET user/1/clock_ins or user/1/clock_ins.json
   def index
-    @clock_ins = @user.clock_ins
+    @clock_ins = @user.clock_ins.page(current_page)
   end
 
   # GET /clock_ins/1 or /clock_ins/1.json
@@ -13,7 +13,7 @@ class ClockInsController < ApplicationController
 
   # Get /user/1/follow_clock_ins or /user/1/follow_clock_ins.json
   def follow_clock_ins
-    @clock_ins = @user.follow_clock_ins.last_week_clock_ins
+    @clock_ins = @user.follow_clock_ins.last_week_clock_ins.page(current_page)
   end
 
   # POST /user/1/clock_in or /user/1/clock_in.json

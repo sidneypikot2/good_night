@@ -1,1 +1,1 @@
-json.array! @user.following, partial: "users/user", as: :user
+json.array! @follows, partial: "users/user", as: :user

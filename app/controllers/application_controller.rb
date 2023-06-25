@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
   end
 
+  def current_page
+    params[:page] || 1
+  end
+
   protected
 
   def record_not_found(exception)
