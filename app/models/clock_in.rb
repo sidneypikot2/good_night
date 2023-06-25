@@ -1,6 +1,6 @@
 class ClockIn < ApplicationRecord
   belongs_to :user
-  belongs_to :follow, primary_key: 'followed_id', foreign_key: 'user_id'
+  has_one :follow, primary_key: 'followed_id', foreign_key: 'user_id'
 
   scope :current_clock_in, -> {
     where(wake_time: nil)
@@ -14,14 +14,14 @@ class ClockIn < ApplicationRecord
   }
 
   def sleep_duration_in_hour
-    ((self.wake_time - self.sleep_time) / 1.hour).round
+    self.wake_time.present? ? ((self.wake_time - self.sleep_time) / 1.hour).round : nil
   end
 
   def formated_wake_time
-    self.wake_time.strftime("%d of %B, %Y - %I:%M %p")
+    self.wake_time&.strftime("%d of %B, %Y - %I:%M %p") || "No wake up clock in yet"
   end
 
   def formated_sleep_time
-    self.sleep_time.strftime("%d of %B, %Y - %I:%M %p")
+    self.sleep_time&.strftime("%d of %B, %Y - %I:%M %p")
   end
 end

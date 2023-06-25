@@ -4,7 +4,7 @@ class ClockInsController < ApplicationController
 
   # GET user/1/clock_ins or user/1/clock_ins.json
   def index
-    @clock_ins = @user.clock_ins.page(current_page)
+    @clock_ins = @user.clock_ins.order(:created_at).page(current_page)
   end
 
   # GET /clock_ins/1 or /clock_ins/1.json
@@ -21,9 +21,9 @@ class ClockInsController < ApplicationController
     @current_clock_in = @user.current_clock_in
 
     if @current_clock_in.present?
-      @current_clock_in.wake_time = DateTime.today
+      @current_clock_in.wake_time = DateTime.now
     else
-      @current_clock_in = @user.clock_ins.build(sleep_time: DateTime.today)
+      @current_clock_in = @user.clock_ins.build(sleep_time: DateTime.now)
     end
 
     if @current_clock_in.save
