@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby version
+  `3.2.0`
+# Rails version
+  `7.0.5`
+# Requirements
+  `git`, `docker`, `docker-compose`
 
-Things you may want to cover:
+# How to setup
 
-* Ruby version
+  `Clone`
 
-* System dependencies
+  * $ git clone https://github.com/sidneypikot2/good_night
 
-* Configuration
+  `Build docker containers`
 
-* Database creation
+  * $ docker compose build
 
-* Database initialization
+  `Start docker containers`
 
-* How to run the test suite
+  * $ docker compose up -d
 
-* Services (job queues, cache servers, search engines, etc.)
+  `Setup database`
 
-* Deployment instructions
+  * $ docker compose exec web rake db:setup db:migrate
 
-* ...
+  `Check logs`
+
+  * $ docker compose exec web tail -f log/development.log
+
+  `Stop docker container`
+
+  * $ docker compose down
+
+  `Import Api Collection to Postman. Filename: `
+   * goodnight.postman_collection.json
